@@ -10,6 +10,7 @@ public class Sistema {
 		
 		String jugador1;
 		String jugador2;
+		String respDuplicarA;
 		
 		int saldoJ1;	int saldoJ2;
 		int apuestaJ1;	int apuestaJ2;
@@ -33,28 +34,70 @@ public class Sistema {
 		System.out.println("Ingrese apuesta del jugador 1 (Apuesta mínima 50$).");
 		apuestaJ1 = ingresoDatos.nextInt();
 		
-		while(saldoJ1<apuestaJ1 | apuestaJ1<50) {
-			
-			System.out.println("Saldo insuficiente o no válido del jugador 1, ingrese otro valor.");
+		while(apuestaJ1<50) {
 			
 			System.out.println("Ingrese apuesta del jugador 1 (Apuesta mínima 50$).");
 			apuestaJ1 = ingresoDatos.nextInt();
+		
+			if(saldoJ1>apuestaJ1) {	
+				System.out.println("¿Desea duplicar la apuesta? Ingrese 'si' o 'no'");
+				respDuplicarA = ingresoDatos.nextLine();	respDuplicarA.toLowerCase(); // En caso de que se ingrese 'Si' o 'No'
+				switch(respDuplicarA) {
+			
+				case "si":saldoJ1=saldoJ1-(apuestaJ1*2);
+				if(saldoJ1>apuestaJ1) {
+				apuestaJ1=apuestaJ1*2;
+				chancesJ1++;
+				}else {
+				System.out.println("Saldo insuficiente para duplicar la apuesta.");
+				saldoJ1=saldoJ1-(apuestaJ1/2);
+				}
+				break;
+			
+				case "no":saldoJ1=saldoJ1-apuestaJ1;
+				chancesJ1++;
+				break;
+				}
+				
+		}else{
+			System.out.println("Saldo insuficiente del jugador 1.");
 		}
-			saldoJ1=saldoJ1-apuestaJ1;
+	}
 			System.out.println("Ingrese posible número incógnita, el rango es de 1 a 100.");
 			respuestaJ1 = ingresoDatos.nextInt();
-		
-		
+			
 		
 		System.out.println("Ingrese apuesta del jugador 2 (Apuesta mínima 50$).");
 		apuestaJ2 = ingresoDatos.nextInt();
 		
-		while(saldoJ2<apuestaJ2 | apuestaJ2<50) {
+		while(apuestaJ2<50) {
 			
 			System.out.println("Ingrese apuesta del jugador 2 (Apuesta mínima 50$).");
 			apuestaJ2 = ingresoDatos.nextInt();
-		}	
-			saldoJ2=saldoJ2-apuestaJ2;
+			
+			if(saldoJ2>apuestaJ2) {	
+				System.out.println("¿Desea duplicar la apuesta? Ingrese 'si' o 'no'");
+				respDuplicarA = ingresoDatos.nextLine();	respDuplicarA.toLowerCase(); // En caso de que se ingrese 'Si' o 'No'
+				switch(respDuplicarA) {
+				
+				case "si":saldoJ2=saldoJ2-(apuestaJ2*2);
+				if(saldoJ2>apuestaJ2) {
+					apuestaJ2=apuestaJ2*2;
+					chancesJ2++;
+				}else {
+					System.out.println("Saldo insuficiente para duplicar la apuesta.");
+					saldoJ2=saldoJ2-(apuestaJ2/2);
+				}
+				break;
+				
+				case "no":saldoJ2=saldoJ2-apuestaJ2;
+					chancesJ2++;
+				break;
+				}	
+			}else{
+				System.out.println("Saldo insuficiente del jugador 2. ¡Ganó el jugador 1!");
+		}
+	}
 			System.out.println("Ingrese posible número incógnita, el rango es de 1 a 100.");
 			respuestaJ2 = ingresoDatos.nextInt();
 			
@@ -71,21 +114,37 @@ public class Sistema {
 					
 					System.out.println("Ingrese apuesta del jugador 1 (Apuesta mínima 50$).");
 					apuestaJ1 = ingresoDatos.nextInt();
-				}
-					if (saldoJ1>apuestaJ1) {
-						// desarrollar la opción de duplicar la apuesta
-						saldoJ1=saldoJ1-apuestaJ1;
-						chancesJ1++;
-					}else {
-						System.out.println("Saldo insuficiente del jugador 1. ¡Gana el jugador 2!");
-					}
 				
+				
+					if(saldoJ1>apuestaJ1) {	
+						System.out.println("¿Desea duplicar la apuesta? Ingrese 'si' o 'no'");
+						respDuplicarA = ingresoDatos.nextLine();	respDuplicarA.toLowerCase(); // En caso de que se ingrese 'Si' o 'No'
+						switch(respDuplicarA) {
+					
+						case "si":saldoJ1=saldoJ1-(apuestaJ1*2);
+						if(saldoJ1>apuestaJ1) {
+						apuestaJ1=apuestaJ1*2;
+						chancesJ1++;
+						}else {
+						System.out.println("Saldo insuficiente para duplicar la apuesta.");
+						saldoJ1=saldoJ1-(apuestaJ1/2);
+						}
+						break;
+					
+						case "no":saldoJ1=saldoJ1-apuestaJ1;
+						chancesJ1++;
+						break;
+						}	
+				}else{
+					System.out.println("Saldo insuficiente del jugador 1. ¡Ganó el jugador 2!");
+			}
+		}	
 				System.out.println("Ingrese posible número incógnita, el rango es de 1 a 100.");
 				respuestaJ1 = ingresoDatos.nextInt();
 				
 				if(respuestaJ1>incognita) {
 					System.out.println("El número ingresado es mayor que la incógnita.");
-				}else {
+				}else{
 					System.out.println("El número ingresado es menor que la incógnita.");
 				}
 				
@@ -98,27 +157,41 @@ public class Sistema {
 				
 					System.out.println("Ingrese apuesta del jugador 2 (Apuesta mínima 50$).");
 					apuestaJ2 = ingresoDatos.nextInt();
-				}
+				
 					if(saldoJ2>apuestaJ2) {	
-						// desarrollar la opción de duplicar la apuesta
-						saldoJ2=saldoJ2-apuestaJ2;
-						chancesJ2++;
-					}else {
+						System.out.println("¿Desea duplicar la apuesta? Ingrese 'si' o 'no'");
+						respDuplicarA = ingresoDatos.nextLine();	respDuplicarA.toLowerCase(); // En caso de que se ingrese 'Si' o 'No'
+						switch(respDuplicarA) {
+						
+						case "si":saldoJ2=saldoJ2-(apuestaJ2*2);
+						if(saldoJ2>apuestaJ2) {
+							apuestaJ2=apuestaJ2*2;
+							chancesJ2++;
+						}else {
+							System.out.println("Saldo insuficiente para duplicar la apuesta.");
+							saldoJ2=saldoJ2-(apuestaJ2/2);
+						}
+						break;
+						
+						case "no":saldoJ2=saldoJ2-apuestaJ2;
+							chancesJ2++;
+						break;
+						}	
+					}else{
 						System.out.println("Saldo insuficiente del jugador 2. ¡Ganó el jugador 1!");
 				}
-				
+			}
 				System.out.println("Ingrese posible número incógnita, el rango es de 1 a 100.");
 				respuestaJ2 = ingresoDatos.nextInt();
 				
 					if(respuestaJ2>incognita) {
 						System.out.println("El número ingresado es mayor que la incógnita.");
-					}else {
+					}else{
 						System.out.println("El número ingresado es menor que la incógnita.");
 					}
 			}
 		
 		}
 
-	}
-
+}
 }
